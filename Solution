@@ -1,0 +1,32 @@
+There are multiple approaches to solving this problem. The first is to simply generate the substring and count the number of a's in it. However, for a sufficiently 
+large value of n, this will become impractical. Alternatively, there is a formula that can be used to determine the number of a's in the substring of length n that 
+is less computationally expensive for very large values of n. 
+
+For the string 'abc' with n = 20, we can determine that the number of a's will be approximately equal to the number of a's in the string s multiplied by the number 
+of times the string repeats to form S, the substring of length n. There will be 7 a's total, because 6 full instances of s occur in S followed by another 2 
+characters 'ab' that terminate the substring. For the same value of n with s = 'aabc', there will be 10 occurrences of the letter a, as there will be 5 full 
+instances of s and no partial instances terminating S. 
+
+Therefore, if we say m = # of a's in s, and q = n // length of s, then the number of a's in S will be approximately equal to m * q, where // represents floor 
+division. The number of characters terminating S after each full instance of s will be r = n % length of s, where % represents modulo. Therefore, to calculate the 
+total number of a's in S, we need only determine how many a's there are in the terminating substring of length r. To accomplish this, we can generate a third string
+c which is a substring of s of length r. We will call the number of a's in r p. 
+
+Therefore, the total number of a's in S is m*q + p. 
+
+m: # of a's in s
+q: n // length of s
+p: # of a's in c, a substring of s equal to n % length of s. 
+
+The pseudocode looks something like this:
+
+function solution(int n, string s):
+  count = 0 // total number of a's in S
+  num = 0   // number of a's in s
+  if n % s.length() > 0:
+    int r = n % s.length()
+    # for i=0 <= r, if s[i] == 'a', count++
+  for char in s:
+    # if char == 'a', num++
+  count += num * s.length()
+return count
